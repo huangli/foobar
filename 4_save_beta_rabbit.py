@@ -1,62 +1,76 @@
 def answer(food, grid):
 
+
+    class Node(object):
+        def __init__(self, data):
+            self.data = data
+            self.left = []
+            self.right = []
+
+        def add_left(self, obj):
+            self.left.append(obj)
+
+        def add_right(self, obj):
+            self.right.append(obj)
 # traverse the tree list
+# grid: the array to convert from
 # x: the start row poistion of the root in grid, start from 0
 # y: the start column poistion of the root in grid, start from 0
-# result: the result tree list
-# index: list node position, the left node = root*2 + 1, right node = root*2 + 2
-    def create_tree(grid, x, y, result, index):
+# node: the node to add
+# return: turn into a tree from a grid
+    def create_tree(grid, x, y, node):
         row = len(grid)
         column = len(grid[0])
-        # result = [-1] * (row + column - 1)
+
         # no doors
         if ((x+1 > row) and (y+1 > column)):
-           return result
+           return node
+        # setting node value
         else:
-           result[index] = grid[x][y]
-        # create node
+            node.data = grid[x][y]
+        # create children
         if (x+1 < row):
-           create_tree(grid, x+1, y, result, index*2+1)
+            left = Node(-1)
+            node.add_left(left)
+            create_tree(grid, x+1, y, left)
         if (y+1 < column):
-           create_tree(grid, x, y+1, result, index*2+2)
+            right = Node(-1)
+            node.add_right(right)
+            create_tree(grid, x, y+1, right)
 
-        return result
+        return node
 
 # traverse the tree list
-# x: the start row poistion of the root in grid, start from 0
-# y: the start column poistion of the root in grid, start from 0
-    def traverse(tree, x, food_for_zombie, result):
-        tree_len = len(tree)
+# food_for_zombie: food need for zombie to leavel the room
+# result: all the food needed saved in the list
+# child_node: child node of the tree
+# return: a list of each road zombie food needed
+    def traverse(food_for_zombie, result, child_node):
 
-        # print "x: " + str(x)
-        # print "food: " + str(food_for_zombie)
-        # dead road
-        if (2*x + 1 >= tree_len and tree[x] != -1):
-            food_for_zombie += tree[x]
+        # dead road, the end of tree
+        if (not child_node.left and not child_node.right):
+            food_for_zombie += child_node.data
             result.append(food_for_zombie)
             food_for_zombie = 0
             return result
-        elif (tree[x] == -1):
+        elif (not child_node):
             return result
         else:
-            food_for_zombie += tree[x]
+            food_for_zombie += child_node.data
             # left node
-            traverse(tree, 2*x+1, food_for_zombie, result)
+            if child_node.left:
+                traverse(food_for_zombie, result, child_node.left[0])
             # right node
-            traverse(tree, 2*x+2, food_for_zombie, result)
+            if child_node.right:
+                traverse(food_for_zombie, result, child_node.right[0])
             return result
 
-    row = len(grid)
-    column = len(grid[0])
+    start_node = Node(0)
+    create_tree(grid, 0, 0, start_node)
+    result = traverse(0, [], start_node)
 
-    tree = [-1] * (pow(2, row+column-1) - 1)
-    tree = create_tree(grid, 0, 0, tree, 0)
-    # print tree
-    result = traverse(tree, 0, 0, [])
-    # print result
-    can_be_save = False
+    # filter the food left, pick the smallest one
     food_left = food
-
     for zombie_food_needed in result:
         if food >= zombie_food_needed:
             temp = food - zombie_food_needed
@@ -73,6 +87,8 @@ if __name__ =="__main__":
     print answer(7, [[0, 2, 5], [1, 1, 3], [2, 1, 1]])
     print answer(12, [[0, 2, 5], [1, 1, 3], [2, 1, 1]])
     # l1 = [[1,2,3], [4,5,6], [7,8,9]]
+    # print answer(10, l1)
+
     # result = [-1] * 31
     # l1 = [[1,2], [3, 4]]
     # result = [-1] * 7

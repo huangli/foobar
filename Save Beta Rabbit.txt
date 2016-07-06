@@ -52,7 +52,9 @@ Use verify [file] to test your solution and see how it does. When you are finish
 - 用 list 当成 tree 可以用2n+1是左儿子，2n+2是右儿子
 - http://www.geeksforgeeks.org/618/
 -  用list 做 tree 报错MemoryError on line 52， tree_list = [-1] * (pow(2, row+column-1) - 1)估计是list 太大
+-  用 tree依然报错，memory error, 但是如果只是 create tree 则不报错，说明遍历的时候出了问题？
 -  
+-   
 -  
 -  
 
