@@ -53,9 +53,11 @@ Use verify [file] to test your solution and see how it does. When you are finish
 - http://www.geeksforgeeks.org/618/
 -  用list 做 tree 报错MemoryError on line 52， tree_list = [-1] * (pow(2, row+column-1) - 1)估计是list 太大
 -  用 tree依然报错，memory error, 但是如果只是 create tree 则不报错，说明遍历的时候出了问题？
--  
--   
--  
--  
+-  尝试不用 tree，只用数组结遍历，增加一个参数保存状态，结果报错 time limit exceeded 
+-  想到了如果不用递归的话，就用[栈](http://www.cnblogs.com/dolphin0520/archive/2011/08/25/2153720.html)出栈的时候 food 也变化即可
+- 尝试用非递归方法遍历，但是节点可能不止遍历一次
+- 
+- 
+
 
   ​
