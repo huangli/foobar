@@ -56,6 +56,8 @@ Use verify [file] to test your solution and see how it does. When you are finish
 -  尝试不用 tree，只用数组结遍历，增加一个参数保存状态，结果报错 time limit exceeded 
 -  想到了如果不用递归的话，就用[栈](http://www.cnblogs.com/dolphin0520/archive/2011/08/25/2153720.html)出栈的时候 food 也变化即可
 - 尝试用非递归方法遍历，但是节点可能不止遍历一次
+- [动态规划](http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/)
+- 
 
 
   ​
