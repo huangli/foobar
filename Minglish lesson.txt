@@ -33,3 +33,12 @@ Output:
     (string) "bac"
 
 Use verify [file] to test your solution and see how it does. When you are finished editing your code, use submit [file] to submit your answer. If your solution passes the test cases, it will be removed from your home folder.
+
+-  为啥顺序改变就就超时
+```
+    temp = sort_list.pop() 或者 pop(0)
+    result = []
+    result.append(temp[0])
+    result.append(temp[1])
+```
+- 查考的还是图论,参考[minglis_lesson](https://github.com/rtheunissen/foobar/blob/master/minglish_lesson.py)
