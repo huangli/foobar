@@ -40,8 +40,8 @@ def breeding(n):
 
 
 if __name__ == "__main__":
-    print answer(7)
-    print answer(100)
-    # for i in range(40):
+    # print answer(7)
+    # print answer(str(10**25))
+    for i in range(40):
         # if i % 2 == 0:
-            # print "i: " + str(i) + ", " + str(breeding(i))
+        print "i: " + str(i) + ", " + str(breeding(i))
